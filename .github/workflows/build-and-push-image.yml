@@ -26,4 +26,4 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/${{ secrets.GCP_PROJECT }}/${{ github.event.repository.name }}:latest
+            gcr.io/${{ secrets.GCP_PROJECT }}/${{ github.event.repository.name }}:latest
