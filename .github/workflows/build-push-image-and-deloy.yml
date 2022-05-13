@@ -46,4 +46,4 @@ jobs:
           region: ${{ secrets.GCP_REGION }}
           env_vars: ${{ secrets.GCP_ENV_VARS }}
           image: gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_SERVICE }}:latest@sha256${{ needs.build.outputs.digest }}
-          service: ${{ ecrets.GCP_SERVICE }}
+          service: ${{ secrets.GCP_SERVICE }}
