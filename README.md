@@ -4,14 +4,27 @@ Container to run [`hledger-web`](https://hledger.org/1.25/hledger-web.html) on G
 
 ## Notes
 
+### General
+
 - Uses [`gcsfuse`](https://github.com/GoogleCloudPlatform/gcsfuse)
 - For some reason `gcsfuse` can [only works with `root` on Cloud Run](https://serverfault.com/questions/1100860/gcsfuse-failed-to-open-dev-fuse-permission-denied)
 - If started locally with `docker run` the `--priviliged` must be used
+
+### Service Account
+
 - The service account used during deployment should use the following roles
   - Cloud Run Viewer
   - Storage Object Admin
+
+### GitHub Actions
+
 - The service account used by the workflow must have Storage Admin permission (to be able to create a new registry)
-- Set `GCP_PROJECT` and `GCR_JSON_KEY` on GitHub for the workflow to work
+- Set the following secrets
+  - `GCP_CREDENTIALS_JSON` - the value of this should the JSON credentials file's contents created for the service account used by the workflow
+  - `GCP_REGION`
+  - `GCP_PROJECT`
+  - `GCP_SERVICE`
+  - `GCP_ENV_VARS` - this will be passed to the Cloud Run service started by the workflow, its value should be something similar to this `GCP_REGION=us-west1,GCP_PROJECT=<project>,GCP_SERVICE=<service>,GCSFUSE_MAX_RETRY_SLEEP=10s,GCS_BUCKET_NAME=hledger,GCS_LEDGER_OBJECT_NAME=.hledger.journal`
 
 ## Environment variables
 
