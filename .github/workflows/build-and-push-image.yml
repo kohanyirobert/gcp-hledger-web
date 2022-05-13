@@ -8,6 +8,7 @@ on:
     paths:
       - Dockerfile
       - run.sh
+      - oauth2-proxy.cfg
 
 jobs:
   build:

@@ -9,5 +9,12 @@ access_token=$(curl -sH "Metadata-Flavor: Google" "http://metadata.google.intern
   | jq -r '.access_token')
 base_url=$(curl -sH "Authorization: Bearer $access_token" "https://$GCP_REGION-run.googleapis.com/apis/serving.knative.dev/v1/namespaces/$GCP_PROJECT/services/$GCP_SERVICE" \
   | jq -r '.status.address.url')
-hledger-web --serve --host=0.0.0.0 --port=$PORT --base-url=$base_url --file=$ledger_file &
+echo "$OAUTH2_PROXY_AUTHENTICATED_EMAILS" > authenticated-emails.txt
+oauth2-proxy \
+  --http-address=0.0.0.0:$PORT \
+  --cookie-secret="$OAUTH2_PROXY_COOKIE_SECRET" \
+  --client-id="$OAUTH2_PROXY_CLIENT_ID" \
+  --client-secret="$OAUTH2_PROXY_CLIENT_SECRET" \
+  --config=oauth2-proxy.cfg &
+hledger-web --serve --base-url=$base_url --file=$ledger_file &
 wait -n

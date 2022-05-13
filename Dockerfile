@@ -26,8 +26,17 @@ RUN HLEDGER_VERSION=1.25 \
       mv -v $binary /usr/local/bin/$stripped_binary ; \
       chmod -v +x /usr/local/bin/$stripped_binary ; \
     done
+RUN OAUTH2_PROXY_VERSION=7.2.1 \
+  && OAUTH2_PROXY_OS=linux \
+  && OAUTH2_PROXY_ARCH=amd64 \
+  && OAUTH2_PROXY_ARCHIVE=oauth2-proxy-v$OAUTH2_PROXY_VERSION.$OAUTH2_PROXY_OS-$OAUTH2_PROXY_ARCH.tar.gz \
+  && curl -LO https://github.com/oauth2-proxy/oauth2-proxy/releases/download/v$OAUTH2_PROXY_VERSION/$OAUTH2_PROXY_ARCHIVE \
+  && tar --strip-components=1 --directory /usr/local/bin -xf $OAUTH2_PROXY_ARCHIVE \
+  && rm -rf $OAUTH2_PROXY_ARCHIVE \
+  && chmod +x /usr/local/bin/oauth2-proxy
 RUN mkdir -p /data
 WORKDIR /app
+COPY oauth2-proxy.cfg .
 COPY run.sh .
 RUN chmod -v +x run.sh
 CMD ["/app/run.sh"]
