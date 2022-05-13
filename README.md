@@ -26,7 +26,7 @@ Container to run [`hledger-web`](https://hledger.org/1.25/hledger-web.html) on G
   - `GCP_REGION`
   - `GCP_PROJECT`
   - `GCP_SERVICE`
-  - `GCP_ENV_VARS` - this will be passed to the Cloud Run service started by the workflow, its value should be something similar to this `GCP_REGION=us-west1,GCP_PROJECT=<project>,GCP_SERVICE=<service>,GCSFUSE_MAX_RETRY_SLEEP=10s,GCS_BUCKET_NAME=hledger,GCS_LEDGER_OBJECT_NAME=.hledger.journal`
+  - `GCP_ENV_VARS` - this will be passed to the Cloud Run service started by the workflow, its value should be something similar to this `GCP_REGION=us-west1,GCP_PROJECT=<project>,GCP_SERVICE=<service>,GCSFUSE_MAX_RETRY_SLEEP=10s,GCS_BUCKET_NAME=hledger,GCS_LEDGER_OBJECT_NAME=.hledger.journal,OAUTH2_PROXY_COOKIE_SECRET=<secret>,OAUTH2_PROXY_CLIENT_ID=<id>,OAUTH2_PROXY_CLIENT_SECRET=<secret>,OAUTH2_PROXY_AUTHENTICATED_EMAILS=<email>`
 
 ## Environment variables
 
@@ -37,3 +37,7 @@ Container to run [`hledger-web`](https://hledger.org/1.25/hledger-web.html) on G
 - `GCSFUSE_MAX_RETRY_SLEEP` - max. seconds `gcsfuse` waits before failing
 - `GCS_BUCKET_NAME` - Cloud Storage bucket name where the ledger is stored
 - `GCS_LEDGER_OBJECT_NAME` - the object name in the bucket used for the ledger
+- `OAUTH2_PROXY_COOKIE_SECRET`
+- `OAUTH2_PROXY_CLIENT_ID`
+- `OAUTH2_PROXY_CLIENT_SECRET`
+- `OAUTH2_PROXY_AUTHENTICATED_EMAILS`
