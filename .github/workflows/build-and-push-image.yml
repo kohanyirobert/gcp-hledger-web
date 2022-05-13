@@ -1,14 +1,13 @@
-name: Build/push image and deploy
+name: Build and push image
 
 on:
   workflow_dispatch:
   push:
     branches:
       - main
-    paths-ignore:
-      - .editorconfig
-      - .gitignore
-      - README.md
+    paths:
+      - Dockerfile
+      - run.sh
 
 jobs:
   build:
