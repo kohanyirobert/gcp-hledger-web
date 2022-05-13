@@ -10,6 +10,8 @@ Container to run [`hledger-web`](https://hledger.org/1.25/hledger-web.html) on G
 - The service account used during deployment should use the following roles
   - Cloud Run Viewer
   - Storage Object Admin
+- The service account used by the workflow must have Storage Admin permission (to be able to create a new registry)
+- Set `GCP_PROJECT` and `GCR_JSON_KEY` on GitHub for the workflow to work
 
 ## Environment variables
 
