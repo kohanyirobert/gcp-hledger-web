@@ -15,9 +15,11 @@ Container to run [`hledger-web`](https://hledger.org/1.25/hledger-web.html) on G
 - The service account used during deployment should use the following roles
   - Cloud Run Viewer
   - Storage Object Admin
+  - Service Account User
 
 ### GitHub Actions
 
+- The *Deploy* workflow deploys the service, but it cannot make it publicly accessible or set that it should use the 2nd generation execution environment, **these must be set manually**
 - The service account used by the workflow must have Storage Admin permission (to be able to create a new registry)
 - Set the following secrets
   - `GCP_CREDENTIALS_JSON` - the value of this should the JSON credentials file's contents created for the service account used by the workflow
